@@ -24,4 +24,10 @@ ansible-galaxy install -r requirements.yaml
 source bin/activate
 ansible-playbooks -i <inventory> plays/<test>.yaml
 ```
+## Upgrade roles
+
+``` bash
+source bin/activate
+ansible-galaxy install -r requirements.yaml --force
+```
 
