@@ -6,8 +6,7 @@
   hosts: imagetest
   become: true
   roles:
-    - role: ansible-common
-      tags: common
+    - role: common
   tasks:
     - name: Write to new filesystem
       get_url:
