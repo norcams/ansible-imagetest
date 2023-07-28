@@ -1,0 +1,15 @@
+---
+# Use ansible-common to mount volume and then write to it
+# see group_vars/imagetest.yaml for more options to ansible-common
+
+- name: Run volume test on all images
+  hosts: imagetest
+  become: true
+  roles:
+    - role: ansible-common
+      tags: common
+  tasks:
+    - name: Write to new filesystem
+      get_url:
+        url: http://download.iaas.uio.no/uh-iaas/rpm/himlarservice-1.0-1.el7.x86_64.rpm
+        dest: "{{ volume_mount_point }}/himlarservice-1.0-1.el7.x86_64.rpm"
