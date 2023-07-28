@@ -4,6 +4,7 @@
 
 * Python 3.9+
 * Python virtualenv
+* (recommended) ansible inventory from [tf-imagetest](https://github.com/norcams/tf-imagetest)
 
 ## Setup 
 
@@ -21,6 +22,6 @@ ansible-galaxy install -r requirements.yaml
 
 ``` bash
 source bin/activate
-ansible-playbooks plays/<test>.yaml
+ansible-playbooks -i <inventory> plays/<test>.yaml
 ```
 
