@@ -14,3 +14,6 @@
       register: result
       failed_when:
         - ("100% packet loss" in result.stdout)
+
+    - name: Check ansible/ssh connection
+      ansible.builtin.ping:
