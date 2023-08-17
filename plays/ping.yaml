@@ -3,18 +3,17 @@
 # Test ping for all hosts in inventory
 #
 - name: Ping all inventory hosts
-  hosts: 127.0.0.1
-  connection: local
+  hosts: all
   gather_facts: false
-  tasks:
 
-    - name: Ping all hosts in inventory
-      ansible.builtin.command: "ping -c 3 -w 5 {{ hostvars[item].ansible_host }}"
+  tasks:
+    - name: Ping all hosts in inventory from control-node (localhost)
+      delegate_to: localhost
+      ansible.builtin.command: "ping -c 3 -w 5 {{ ansible_host }}"
+      changed_when: false
       register: result
       failed_when:
         - ("100% packet loss" in result.stdout)
-      with_inventory_hostnames:
-        - all
-      ignore_errors: true
-      loop_control:
-        label: "{{ hostvars[item].ansible_host }} {{ item }} {{ result.stdout_lines[1] }}"
+
+    - name: Check ansible/ssh connection
+      ansible.builtin.ping:
